@@ -78,6 +78,44 @@ Open `http://localhost:3000` to view the dashboard! *(Requires [Docker Desktop](
 
 ---
 
+## Cloudflare HTTPS Deployment
+
+For public deployments, use the Nginx overlay so Cloudflare talks HTTPS to your origin while the frontend and backend stay on Docker's private network/loopback ports.
+
+1. In Cloudflare DNS, create a proxied `A` or `AAAA` record for your host.
+2. In Cloudflare SSL/TLS, set encryption mode to `Full (strict)`.
+3. Generate a Cloudflare Origin Certificate for your hostname.
+4. Save the certificate and key locally:
+
+```bash
+mkdir -p certs
+# save certificate as certs/cloudflare-origin.pem
+# save private key as certs/cloudflare-origin-key.pem
+```
+
+5. Create or update `.env` next to `docker-compose.yml`:
+
+```bash
+PUBLIC_HOSTNAME=shadowbroker.example.com
+BIND=127.0.0.1
+HTTP_PORT=80
+HTTPS_PORT=443
+TLS_CERT_PATH=./certs/cloudflare-origin.pem
+TLS_KEY_PATH=./certs/cloudflare-origin-key.pem
+CORS_ORIGINS=https://shadowbroker.example.com
+```
+
+6. Start with the Cloudflare overlay:
+
+```bash
+docker compose -f docker-compose.yml -f docker-compose.cloudflare.yml pull
+docker compose -f docker-compose.yml -f docker-compose.cloudflare.yml up -d
+```
+
+Open `https://shadowbroker.example.com`. Nginx terminates TLS, redirects HTTP to HTTPS, trusts Cloudflare's `CF-Connecting-IP`, and forwards all app/API traffic through the existing Next.js frontend proxy.
+
+---
+
 ##  🔄 **How to Update**
 
 ShadowBroker uses pre-built Docker images — no local building required. Updating takes seconds:

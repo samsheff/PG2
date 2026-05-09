@@ -11,37 +11,22 @@ npm run dev        # http://localhost:3000
 
 ## API URL Configuration
 
-The frontend needs to reach the backend (default port `8000`). Resolution order:
+Browser API calls use relative `/api/*` paths. The catch-all route handler at
+`src/app/api/[...path]/route.ts` proxies those requests to the backend using the
+runtime `BACKEND_URL` environment variable.
 
-1. **`NEXT_PUBLIC_API_URL`** env var — if set, used as-is (build-time, baked by Next.js)
-2. **Server-side (SSR)** — falls back to `http://localhost:8000`
-3. **Client-side (browser)** — auto-detects using `window.location.hostname:8000`
+Common deployments:
 
-### Common scenarios
+| Scenario | Action needed |
+| --- | --- |
+| Local dev (`localhost:3000` + `localhost:8000`) | None |
+| Docker Compose | `BACKEND_URL=http://backend:8000` is set by Compose |
+| Cloudflare/Nginx overlay | Route all traffic to the frontend; keep `BACKEND_URL=http://backend:8000` |
+| Backend on another host | Set runtime `BACKEND_URL=http://backend-host:8000` |
 
-| Scenario                                        | Action needed                                                   |
-| ----------------------------------------------- | --------------------------------------------------------------- |
-| Local dev (`localhost:3000` + `localhost:8000`) | None — auto-detected                                            |
-| LAN access (`192.168.x.x:3000`)                 | None — auto-detected from browser hostname                      |
-| Public deploy (same host, port 8000)            | None — auto-detected                                            |
-| Backend on different port (e.g. `9096`)         | Set `NEXT_PUBLIC_API_URL=http://host:9096` before build         |
-| Backend on different host                       | Set `NEXT_PUBLIC_API_URL=http://backend-host:8000` before build |
-| Behind reverse proxy (e.g. `/api` path)         | Set `NEXT_PUBLIC_API_URL=https://yourdomain.com` before build   |
-
-### Setting the variable
-
-```bash
-# Shell (Linux/macOS)
-NEXT_PUBLIC_API_URL=http://myserver:8000 npm run build
-
-# PowerShell (Windows)
-$env:NEXT_PUBLIC_API_URL="http://myserver:8000"; npm run build
-
-# Docker Compose (set in .env file next to docker-compose.yml)
-NEXT_PUBLIC_API_URL=http://myserver:8000
-```
-
-> **Note:** This is a build-time variable. Changing it requires rebuilding the frontend.
+Do not route `/api/*` around the frontend in production. The Next.js proxy adds
+runtime backend routing, admin/session handling, and Wormhole-sensitive path
+behavior before forwarding requests to FastAPI.
 
 ## Theming
 

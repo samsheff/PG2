@@ -1,0 +1,41 @@
+# Cloudflare/edge deployment overlay.
+# Usage:
+#   docker compose -f docker-compose.yml -f docker-compose.cloudflare.yml up -d
+#
+# Keep BIND=127.0.0.1 so the raw frontend/backend ports stay local-only while
+# Nginx is the public HTTPS entrypoint.
+services:
+  nginx:
+    image: nginx:1.27-alpine
+    container_name: shadowbroker-nginx
+    depends_on:
+      frontend:
+        condition: service_healthy
+    ports:
+      - "${HTTP_BIND:-0.0.0.0}:${HTTP_PORT:-80}:80"
+      - "${HTTPS_BIND:-0.0.0.0}:${HTTPS_PORT:-443}:443"
+    environment:
+      - PUBLIC_HOSTNAME=${PUBLIC_HOSTNAME:-_}
+      - FRONTEND_UPSTREAM=${FRONTEND_UPSTREAM:-frontend:3000}
+    volumes:
+      - ./nginx/templates:/etc/nginx/templates:ro
+      - ./nginx/conf.d/cloudflare-real-ip.conf:/etc/nginx/conf.d/00-cloudflare-real-ip.conf:ro
+      - type: bind
+        source: ${TLS_CERT_PATH:-./certs/cloudflare-origin.pem}
+        target: /etc/nginx/certs/tls.crt
+        read_only: true
+        bind:
+          create_host_path: false
+      - type: bind
+        source: ${TLS_KEY_PATH:-./certs/cloudflare-origin-key.pem}
+        target: /etc/nginx/certs/tls.key
+        read_only: true
+        bind:
+          create_host_path: false
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q --spider --no-check-certificate https://127.0.0.1/healthz || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
