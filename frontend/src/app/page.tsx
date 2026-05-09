@@ -525,7 +525,7 @@ export default function Dashboard() {
                   className="text-2xl font-bold tracking-[0.4em] text-[var(--text-primary)] flex items-center gap-3 text-glow"
                   style={{ fontFamily: 'var(--font-roboto-mono), monospace' }}
                 >
-                  P H A N T O M <span className="text-green-400">G R A P H</span>
+                  PHANTOM<span className="text-green-400">GRAPH</span>
                 </h1>
                 <span className="text-[11px] text-[var(--text-muted)] font-mono tracking-[0.3em] mt-1 ml-1">
                   GLOBAL THREAT INTERCEPT
