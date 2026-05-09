@@ -2697,7 +2697,7 @@ function SentinelTab() {
                 {' '}&rarr; <span className="text-white">User Settings</span>
                 {' '}&rarr; <span className="text-white">OAuth clients</span> tab &rarr;{' '}
                 click <span className="text-cyan-400">&quot;+ Create new&quot;</span>.
-                Give it any name (e.g. &quot;ShadowBroker&quot;). Copy the{' '}
+                Give it any name (e.g. &quot;PhantomGraph&quot;). Copy the{' '}
                 <span className="text-white">Client ID</span> and{' '}
                 <span className="text-white">Client Secret</span> it shows you.
               </p>
@@ -2799,7 +2799,7 @@ function SentinelTab() {
 
         <div className="mt-2 p-2 border border-[var(--border-primary)]/40 bg-[var(--bg-primary)]/30">
           <p className="text-[13px] text-[var(--text-muted)] font-mono leading-relaxed">
-            Credentials stay in browser-only storage and never touch ShadowBroker servers.
+            Credentials stay in browser-only storage and never touch PhantomGraph servers.
             {storageMode === 'session'
               ? ' Current privacy mode keeps them in session storage only.'
               : ' Current privacy mode keeps them in local storage for persistence.'}

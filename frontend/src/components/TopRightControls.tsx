@@ -60,7 +60,7 @@ const DEFAULT_RELEASES_URL = 'https://github.com/BigBodyCobain/Shadowbroker/rele
 const AUTO_UPDATE_DETAIL =
   'This runtime can use the backend-managed update path. Docker deployments will show pull instructions instead of modifying files in place.';
 const DESKTOP_UPDATER_DETAIL =
-  'This packaged desktop app can install the signed update in place. It will restart ShadowBroker after the installer finishes.';
+  'This packaged desktop app can install the signed update in place. It will restart PhantomGraph after the installer finishes.';
 
 function packagedUpdateDetail(ownsLocalBackend: boolean): string {
   if (ownsLocalBackend) {
@@ -474,7 +474,7 @@ export default function TopRightControls({
             : '';
         setErrorMessage(
           message === 'desktop_update_installed_restart_required'
-            ? 'Update installed. Restart ShadowBroker to finish applying it.'
+            ? 'Update installed. Restart PhantomGraph to finish applying it.'
             : message || 'Desktop updater failed. Use manual download if this keeps happening.',
         );
         setUpdateStatus('update_error');

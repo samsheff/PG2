@@ -32,9 +32,9 @@ export default function AIQueryView({ onBack }: AIQueryViewProps) {
   const [messages, setMessages] = useState<AIMessage[]>([
     {
       role: 'system',
-      content: `🌍📡 SHADOWBROKER AI CO-PILOT ONLINE
+      content: `🌍📡 PHANTOMGRAPH AI CO-PILOT ONLINE
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Connected to ShadowBroker OSINT platform.
+Connected to PhantomGraph OSINT platform.
 I can query telemetry, place pins on the map,
 search satellite imagery, aggregate news,
 and access all 30+ data layers.
@@ -127,7 +127,7 @@ SYSTEM:
         const resp = await fetch(`${base}/status`);
         const data = await resp.json();
         return {
-          content: `🌍✅ SHADOWBROKER AI STATUS:
+          content: `🌍✅ PHANTOMGRAPH AI STATUS:
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━
 Status: ${data.status || 'ONLINE'}
 Capabilities: ${(data.capabilities || []).join(', ')}
@@ -178,7 +178,7 @@ ${data.report || JSON.stringify(data, null, 2)}`,
             });
             const data = await resp.json();
             return {
-              content: `🌍📌 SHADOWBROKER PINNING:
+              content: `🌍📌 PHANTOMGRAPH PINNING:
 Pin placed successfully!
   📍 ${lat.toFixed(4)}°, ${lng.toFixed(4)}°
   🏷️ ${label}
@@ -208,7 +208,7 @@ ${pinList || '  No pins placed yet.'}`,
 
       if (lowerQuery === 'clear pins') {
         await fetch(`${base}/pins`, { method: 'DELETE' });
-        return { content: '🌍❌ SHADOWBROKER CLEARING:\nAll AI intel pins cleared.' };
+        return { content: '🌍❌ PHANTOMGRAPH CLEARING:\nAll AI intel pins cleared.' };
       }
 
       if (lowerQuery === 'snapshot' || lowerQuery === 'take snapshot') {
@@ -219,7 +219,7 @@ ${pinList || '  No pins placed yet.'}`,
         });
         const data = await resp.json();
         return {
-          content: `🌍🕰️ SHADOWBROKER TIMEMACHINE:
+          content: `🌍🕰️ PHANTOMGRAPH TIMEMACHINE:
 Snapshot taken!
   🆔 ${data.snapshot_id}
   🕐 ${data.timestamp}
@@ -320,7 +320,7 @@ ${alerts}`,
 
       // Generic fallback — try summary
       return {
-        content: `🌍🔍 SHADOWBROKER SEARCHING:
+        content: `🌍🔍 PHANTOMGRAPH SEARCHING:
 Processing query: "${query}"
 
 I can directly execute these commands:
@@ -338,9 +338,9 @@ Type "help" for the full command list.`,
       };
     } catch (error) {
       return {
-        content: `🌍⚠️ SHADOWBROKER WARNING:
+        content: `🌍⚠️ PHANTOMGRAPH WARNING:
 Query failed: ${error instanceof Error ? error.message : 'Unknown error'}
-Make sure the ShadowBroker backend is running on localhost:8000.`,
+Make sure the PhantomGraph backend is running on localhost:8000.`,
       };
     }
   }, []);
@@ -434,7 +434,7 @@ Make sure the ShadowBroker backend is running on localhost:8000.`,
           <div className="space-y-3 text-sm font-mono">
             {/* API Endpoint */}
             <div>
-              <div className="text-[11px] text-gray-500 uppercase tracking-widest mb-1">Your ShadowBroker API Endpoint</div>
+              <div className="text-[11px] text-gray-500 uppercase tracking-widest mb-1">Your PhantomGraph API Endpoint</div>
               <div className="flex items-center gap-2">
                 <code className="flex-1 bg-black/60 border border-purple-800/40 px-3 py-2 text-purple-300 text-sm rounded-sm select-all">
                   {apiEndpoint}

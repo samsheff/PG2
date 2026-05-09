@@ -4,7 +4,7 @@ import { ThemeProvider } from '@/lib/ThemeContext';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'WORLDVIEW // ORBITAL TRACKING',
+  title: 'PHANTOMGRAPH // GLOBAL SITUATION MONITORING',
   description: 'Advanced Geopolitical Risk Dashboard',
 };
 

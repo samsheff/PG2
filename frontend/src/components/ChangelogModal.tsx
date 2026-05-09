@@ -41,11 +41,11 @@ const HEADLINE_FEATURES = [
     icon: <Bot size={20} className="text-purple-400" />,
     accent: 'purple' as const,
     title: 'Agentic AI Channel — supports OpenClaw and any HMAC-signing agent',
-    subtitle: 'ShadowBroker now exposes a signed agent command channel. Bring your own agent (OpenClaw, Claude Code, GPT, LangChain, or a custom client) and drive the dashboard from any LLM that speaks the protocol.',
+    subtitle: 'PhantomGraph now exposes a signed agent command channel. Bring your own agent (OpenClaw, Claude Code, GPT, LangChain, or a custom client) and drive the dashboard from any LLM that speaks the protocol.',
     details: [
       'A signed command channel (POST /api/ai/channel/command) plus a batched concurrent-execution endpoint (up to 20 tool calls per round-trip via /api/ai/channel/batch). Agents query flights, ships, SIGINT, news, and intel layers; reason over the live mesh; and run market or threat analyses without a human in the loop.',
       'HMAC-SHA256 request signing with timestamp + nonce replay protection. Tier-gated access (restricted vs full) governs which read and write commands the agent can invoke. Every call is auditable through the channel log.',
-      'ShadowBroker does not bundle an LLM, an agent runtime, or model weights — it ships the protocol. Any agent that signs requests with the documented HMAC contract can connect. OpenClaw is the reference implementation.',
+      'PhantomGraph does not bundle an LLM, an agent runtime, or model weights — it ships the protocol. Any agent that signs requests with the documented HMAC contract can connect. OpenClaw is the reference implementation.',
     ],
     callToAction: 'CONNECT YOUR AGENT \u2192 /API/AI/CHANNEL/COMMAND',
   },

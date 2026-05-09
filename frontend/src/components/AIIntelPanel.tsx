@@ -554,17 +554,17 @@ function ConnectModalBody({ apiEndpoint, handleCopy, copied }: ConnectModalBodyP
   // Connection snippet — display is masked, copy has real key
   const buildSnippet = (key: string) => {
     const lines: string[] = [];
-    if (resolvedUrl) lines.push(`SHADOWBROKER_URL=${resolvedUrl}`);
-    lines.push(`SHADOWBROKER_KEY=${key}`);
-    lines.push(`SHADOWBROKER_ACCESS=${accessTier}`);
-    if (connectionMode === 'remote' && nodeId) lines.push(`SHADOWBROKER_NODE_ID=${nodeId}`);
+    if (resolvedUrl) lines.push(`PHANTOMGRAPH_URL=${resolvedUrl}`);
+    lines.push(`PHANTOMGRAPH_KEY=${key}`);
+    lines.push(`PHANTOMGRAPH_ACCESS=${accessTier}`);
+    if (connectionMode === 'remote' && nodeId) lines.push(`PHANTOMGRAPH_NODE_ID=${nodeId}`);
     lines.push('');
     lines.push('# OPERATING DIRECTIVE:');
-    lines.push('# You are a remote OpenClaw agent connected to ShadowBroker.');
-    lines.push('# ShadowBroker is a live intelligence and telemetry platform, not a narrow single-purpose API.');
+    lines.push('# You are a remote OpenClaw agent connected to PhantomGraph.');
+    lines.push('# PhantomGraph is a live intelligence and telemetry platform, not a narrow single-purpose API.');
     lines.push('# Treat the platform as having broad live telemetry unless a focused check proves otherwise.');
     lines.push("# Do not claim a layer, entity type, or capability is unavailable until you verify it from live data.");
-    lines.push("# If something is absent, say 'not found in current telemetry' or 'not present in the current dataset' rather than saying ShadowBroker cannot track it.");
+    lines.push("# If something is absent, say 'not found in current telemetry' or 'not present in the current dataset' rather than saying PhantomGraph cannot track it.");
     lines.push('# Full access means you MAY place pins, create layers, inject data, set watches, and trigger displays, but do not perform write actions unless the user asks or the task clearly requires it.');
     lines.push('# For ordinary questions, prefer read commands and concise answers grounded in live results.');
 
@@ -599,7 +599,7 @@ function ConnectModalBody({ apiEndpoint, handleCopy, copied }: ConnectModalBodyP
     // SAR (Synthetic Aperture Radar) ground-change layer
     lines.push('');
     lines.push('# SAR GROUND-CHANGE LAYER:');
-    lines.push('# ShadowBroker has a full SAR (Synthetic Aperture Radar) layer that detects ground changes through cloud cover, at night, anywhere on Earth.');
+    lines.push('# PhantomGraph has a full SAR (Synthetic Aperture Radar) layer that detects ground changes through cloud cover, at night, anywhere on Earth.');
     lines.push('# Two modes — both free:');
     lines.push('#   Mode A (Catalog): Free Sentinel-1 scene metadata from Alaska Satellite Facility. No account needed. Shows radar passes over AOIs and next-pass timing.');
     lines.push('#   Mode B (Anomalies): Pre-processed ground-change alerts from NASA OPERA (DISP deformation, DSWx water, DIST-ALERT vegetation), Copernicus EGMS, GFM floods, UNOSAT/EMS damage. Requires free Earthdata token.');
@@ -666,7 +666,7 @@ function ConnectModalBody({ apiEndpoint, handleCopy, copied }: ConnectModalBodyP
       lines.push('# 2. Tor starts a SOCKS5 proxy on localhost:9050');
       lines.push('# 3. Route requests through it:  pip install PySocks requests[socks]');
       lines.push('#    proxies = {"http": "socks5h://127.0.0.1:9050", "https": "socks5h://127.0.0.1:9050"}');
-      lines.push('#    requests.get(SHADOWBROKER_URL + "/api/health", proxies=proxies)');
+      lines.push('#    requests.get(PHANTOMGRAPH_URL + "/api/health", proxies=proxies)');
     }
     return lines.join('\n');
   };
@@ -695,7 +695,7 @@ function ConnectModalBody({ apiEndpoint, handleCopy, copied }: ConnectModalBodyP
                 Heads Up
               </div>
               <p className="text-xs font-mono text-amber-200/80 leading-relaxed">
-                Connecting an AI agent gives it access to your ShadowBroker data.
+                Connecting an AI agent gives it access to your PhantomGraph data.
                 You control what it can do (read-only or full access). You&apos;re
                 responsible for what your agent does with it.
               </p>
@@ -732,7 +732,7 @@ function ConnectModalBody({ apiEndpoint, handleCopy, copied }: ConnectModalBodyP
                   Local
                 </div>
                 <p className="text-[10px] font-mono text-gray-500 mt-1">
-                  Same machine as ShadowBroker
+                  Same machine as PhantomGraph
                 </p>
               </button>
               <button

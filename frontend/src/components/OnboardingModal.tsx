@@ -128,9 +128,9 @@ const OnboardingModal = React.memo(function OnboardingModal({
       : torAddress || '<prepare remote .onion link>';
 
   const agentSnippet = [
-    `SHADOWBROKER_URL=${agentEndpoint}`,
-    agentSecret ? `SHADOWBROKER_KEY=${agentSecret}` : 'SHADOWBROKER_KEY=<generate in ShadowBroker>',
-    `SHADOWBROKER_ACCESS=${agentTier}`,
+    `PHANTOMGRAPH_URL=${agentEndpoint}`,
+    agentSecret ? `PHANTOMGRAPH_KEY=${agentSecret}` : 'PHANTOMGRAPH_KEY=<generate in PhantomGraph>',
+    `PHANTOMGRAPH_ACCESS=${agentTier}`,
     '',
     '# FIRST: load available tools',
     `GET ${agentEndpoint}/api/ai/tools`,
@@ -201,7 +201,7 @@ const OnboardingModal = React.memo(function OnboardingModal({
       setTorAddress(data.onion_address);
       setAgentMsg({
         type: 'ok',
-        text: 'Tor is ready. The remote agent link is private to your local ShadowBroker node.',
+        text: 'Tor is ready. The remote agent link is private to your local PhantomGraph node.',
       });
     } catch (error) {
       setAgentMsg({
@@ -209,7 +209,7 @@ const OnboardingModal = React.memo(function OnboardingModal({
         text:
           error instanceof Error
             ? error.message
-            : 'ShadowBroker could not install or start Tor automatically. Check network access and try again.',
+            : 'PhantomGraph could not install or start Tor automatically. Check network access and try again.',
       });
     } finally {
       setTorStarting(false);
@@ -377,7 +377,7 @@ const OnboardingModal = React.memo(function OnboardingModal({
                         Local
                       </p>
                       <p className="text-[10px] text-[var(--text-muted)] font-mono mt-1">
-                        Same machine as ShadowBroker
+                        Same machine as PhantomGraph
                       </p>
                     </button>
                     <button
@@ -463,7 +463,7 @@ const OnboardingModal = React.memo(function OnboardingModal({
                             TOR REQUIRED FOR REMOTE AGENTS
                           </p>
                           <p className="text-[10px] text-[var(--text-muted)] font-mono mt-1 leading-relaxed">
-                            ShadowBroker will install or use Tor locally, then create a private .onion link for this backend.
+                            PhantomGraph will install or use Tor locally, then create a private .onion link for this backend.
                           </p>
                         </div>
                         <button
@@ -519,7 +519,7 @@ const OnboardingModal = React.memo(function OnboardingModal({
                         START HERE
                       </p>
                       <p className="text-sm text-[var(--text-secondary)] font-mono leading-relaxed">
-                        OpenSky Network and AIS Stream are the free keys that make ShadowBroker
+                        OpenSky Network and AIS Stream are the free keys that make PhantomGraph
                         useful immediately: live aircraft and vessel tracking. Paste them below or
                         use Settings later; secrets stay on the local backend.
                       </p>
@@ -533,7 +533,7 @@ const OnboardingModal = React.memo(function OnboardingModal({
                       QUICK LOCAL SETUP
                     </p>
                     <p className="text-sm text-[var(--text-secondary)] font-mono leading-relaxed mt-1">
-                      Paste keys here once. ShadowBroker stores them server-side only and never
+                      Paste keys here once. PhantomGraph stores them server-side only and never
                       displays the secret back in the browser.
                     </p>
                   </div>
